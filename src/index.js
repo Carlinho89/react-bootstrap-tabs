@@ -40,12 +40,12 @@ class TabsComponent extends React.Component {
          * Optional CSS style to apply to each tab header
          */
         headerStyle: React.PropTypes.object,
-        
+
         /**
          * Optional CSS class to apply to the active tab header
          */
         activeHeaderClass: React.PropTypes.string,
-        
+
         /**
          * Optional CSS style to apply to the active tab header
          */
@@ -55,7 +55,7 @@ class TabsComponent extends React.Component {
          * Optional CSS class to apply to the content container for the currently selected tab
          */
         contentClass: React.PropTypes.string,
-        
+
         /**
          * Optional CSS style to apply to the content container for the currently selected tab
          */
@@ -69,8 +69,12 @@ class TabsComponent extends React.Component {
         /**
          * The child tabs to display - either an array or an element
          */
-        children: React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.element])
+        children: React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.element]),
 
+        /**
+         * The child tabs to display - either an array or an element
+         */
+         navHeaderClassName: React.PropTypes.string
     }
 
     static defaultProps = {
@@ -142,7 +146,7 @@ class TabsComponent extends React.Component {
         const linkStyle = Object.assign({}, this.props.headerStyle, tab.props.headerStyle, customActiveHeaderStyle);
 
         return (
-            <li key={index} className="nav-item" >
+            <li key={index} className={'nav-item ' + this.props.navHeaderClassName ? this.props.navHeaderClassName : ''} >
                 <a className={linkClasses} style={linkStyle} onClick={tab.props.disabled ? null : this._handleClick.bind(this, index)}>{tab.props.label}</a>
             </li>
         );
@@ -234,7 +238,7 @@ class TabComponent extends React.Component {
         /**
          * Label to display as the tab header
          */
-        label: React.PropTypes.string.isRequired,
+        label: React.PropTypes.any.isRequired,
 
         /**
          * Is this tab disabled?  Default: false
@@ -255,7 +259,7 @@ class TabComponent extends React.Component {
          * Optional CSS class to apply to the tab header
          */
         headerClass: React.PropTypes.string,
- 
+
        /**
          * Optional CSS style to apply to the tab header
          */
@@ -265,7 +269,7 @@ class TabComponent extends React.Component {
          * Optional CSS style to apply to the active tab header
          */
         activeHeaderStyle: React.PropTypes.object,
-        
+
         /**
          * Optional CSS class to apply to the tab header when active
          */
